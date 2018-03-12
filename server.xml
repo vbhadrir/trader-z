@@ -1,0 +1,37 @@
+<!--
+       Copyright 2017 IBM Corp All Rights Reserved
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<server description="Stock Quote server">
+    <!-- Enable features -->
+    <featureManager>
+        <feature>webProfile-7.0</feature>
+        <feature>localConnector-1.0</feature>
+        <feature>jaxrs-2.0</feature>
+        <feature>transportSecurity-1.0</feature> 
+    </featureManager>
+
+    <logging consoleLogLevel="INFO" traceSpecification="*=info"/>
+
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint httpPort="9080" httpsPort="9443" host="*" id="defaultHttpEndpoint"/>
+
+     <ssl id="defaultSSLConfig" keyStoreRef="defaultKeyStore" trustStoreRef="defaultTrustStore"/>
+          <keyStore id="defaultKeyStore" location="zceeml.jks" password="fredpwd" type="JKS"/>
+          <keyStore id="defaultTrustStore" location="zceeml.jks" password="fredpwd" type="JKS"/>  
+
+      <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+    <applicationMonitor updateTrigger="mbean"/>
+
+    <webApplication id="TraderUI" location="TraderUI.war" name="TraderUI" contextRoot="/trader"/>
+</server>
